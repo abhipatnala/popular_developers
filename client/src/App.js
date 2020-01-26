@@ -16,7 +16,8 @@ export default class App extends React.PureComponent {
       period: "weekly",
       statOption: "developer_stats",
       stats: [],
-      showLoader: false
+      showLoader: false,
+      showError: false
     };
   }
 
@@ -46,8 +47,14 @@ export default class App extends React.PureComponent {
     }).then(response => {
       this.setState({
         stats: response.data,
-        showLoader: false
+        showLoader: false,
+        showError: false
       });
+    }).catch(error => {
+      this.setState({
+        showLoader: false,
+        showError: true
+      })
     });
   };
 
@@ -105,7 +112,11 @@ export default class App extends React.PureComponent {
               </Col>
             </Row>
             <Row className="statsColumn">
-              <ReactJson src={this.state.stats} {...jsonConfig} />
+              {
+                (!this.state.showError) ?
+                  <div><ReactJson src={this.state.stats} {...jsonConfig} /> </div> :
+                  <div>Unknown error occured</div>
+              }
             </Row>
           </LoadingOverlay>
         </Container>
