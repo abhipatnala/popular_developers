@@ -1,0 +1,16 @@
+.statsColumn {
+  margin-top: 15px;
+}
+
+.dropDown {
+  width: 200px;
+}
+
+._loading_overlay_content{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 350px !important;
+}
